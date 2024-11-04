@@ -20,14 +20,58 @@ void sleepForSeconds(int seconds);
 void clearScreen();
 
 bool gameIsRunning = true;
+bool selectionOfGame = true;
 
 class Game {
     public:
 
     void playGame() {
-        cout << "Playing game..." << endl;
-        cin.ignore();
-        cin.get();
+        clearScreen();
+        do {
+            cout << "Select which game you would like to play: " << endl;
+
+            cout << "1. Snake" << endl;
+            cout << "2. Tic Tac Toe" << endl;
+            cout << "3. Connect Four" << endl;
+            cout << "4. Hangman" << endl;
+            cout << "5. Return to main menu" << endl << endl;
+
+            cout << "Choice: ";
+            int choiceOfGame;
+            cin >> choiceOfGame;
+            cout << endl;
+            switch (choiceOfGame) {
+                case 1:
+                    cout << "Playing game 1" << endl;
+                    cin.ignore();
+                    cin.get();
+                    break;
+                case 2:
+                    cout << "Playing game 2" << endl;
+                    cin.ignore();
+                    cin.get();
+                    break;
+                case 3:
+                    cout << "Playing game 3" << endl;
+                    cin.ignore();
+                    cin.get();
+                    break;
+                case 4:
+                    cout << "Playing game 4" << endl;
+                    cin.ignore();
+                    cin.get();
+                    break;
+                case 5:
+                    selectionOfGame = false;
+                    break;
+                default:
+                cout << "Invalid choice. Please try again." << endl;
+                break;
+            }
+        } while (selectionOfGame);
+       
+        cout << endl << endl << "Returning to main menu..." << endl;
+        sleepForSeconds(3);
     }
 };
 
@@ -63,8 +107,9 @@ void mainMenu () {
                 gameIsRunning = false;
                 break;
             default:
-            cout << "Invalid choice. Please try again." << endl;
-            sleepForSeconds(2);
+                cout << "Invalid choice. Please try again." << endl;
+                sleepForSeconds(2);
+                break;
         }
     } while (gameIsRunning);
     
@@ -109,4 +154,3 @@ int main() {
     mainMenu();
     return 0;
 }
-
