@@ -1,4 +1,4 @@
-# E-Arcade - Our own project
+# Rouge-Arcade - Our own project
 Our own little project, an arcade area written in C++. 
 
 ## Description
