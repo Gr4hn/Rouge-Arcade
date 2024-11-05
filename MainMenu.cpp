@@ -23,13 +23,57 @@ void playgame();
 bool gameIsRunning = true;
 bool selectionOfGame = true;
 
-class Game {
+class player {
+    private:
+
+    string name;
+    int scoreInSnake = 0;
+    int scoreInTicTacToe = 0;
+    int scoreInConnectFour;
+    int scoreInHangman;
+    int level;
 
     public:
+    player(string name, int score, int level) {
+        this->name = name;
+        this->level = level;
+    }
 
-
+    string getName() const {
+        return name;
+    }
+    void registerPlayer(string gameType, int score) {
+        if (gameType == "Snake") {
+            scoreInSnake += score;
+        } else if (gameType == "TicTacToe") {
+            scoreInTicTacToe += score;
+        } else if (gameType == "ConnectFour") {
+            scoreInConnectFour += score;
+        } else if (gameType == "Hangman") {
+            scoreInHangman += score;
+        }
+        // Update level based on some criteria, for example:
+        level = (scoreInSnake + scoreInTicTacToe + scoreInConnectFour + scoreInHangman) / 100;
+    }
+    void displayPlayerInfo() {
+        cout << "Name: " << name << endl;
+        cout << "Score: " << scoreInSnake << endl;
+        cout << "Score: " << scoreInTicTacToe << endl;
+        cout << "Score: " << scoreInConnectFour << endl;
+        cout << "Score: " << scoreInHangman << endl;
+        cout << "Level: " << level << endl;
+    }
+    void displayScores() {
+        cout << "Scores:" << endl;
+        cout << "Snake: " << scoreInSnake << endl;
+        cout << "TicTacToe: " << scoreInTicTacToe << endl;
+        cout << "ConnectFour: " << scoreInConnectFour << endl;
+        cout << "Hangman: " << scoreInHangman << endl;
+        cout << "Level: " << level << endl;
+    }
 };
 
+vector<player> registeredPlayers;
 
 
 void sleepForSeconds(int seconds) {
@@ -40,7 +84,63 @@ void clearScreen() {
     system("cls");
 }
 
+void playerSelection () {
+     string choiceOfPlayer;
+    bool selectedPlayer = false;
+    player* currentPlayer = nullptr;
+    do {
+        clearScreen();
+        cout << "Have you played before?" << endl;
+        cout << "Yes or No: ";
+        cin >> choiceOfPlayer;
+        transform(choiceOfPlayer.begin(), choiceOfPlayer.end(), choiceOfPlayer.begin(), ::tolower);
+        if (choiceOfPlayer == "no") {
+            cout << "Enter your name: ";
+            string name;
+            cin >> name;
+            registeredPlayers.push_back(player(name, 1, 0));
+            currentPlayer = &registeredPlayers.back();
+            selectedPlayer = true;
+            cout << "Welcome, " << name << "!" << endl;
+            cout << "You have been registered." << endl;
+            cout << "Press enter to continue..." << endl;
+            cin.ignore();
+            cin.get();
+        }
+        else if (choiceOfPlayer == "yes") {
+            cout << "Current registered players: " << endl;
+            for (int i = 0; i < registeredPlayers.size(); i++) {
+                cout << registeredPlayers[i].getName() << endl;
+            }
+            cout << "Enter your name player: ";
+            string name;
+            cin >> name;
+            auto it = find_if(registeredPlayers.begin(), registeredPlayers.end(), [&name](const player& p) {
+                return p.getName() == name;
+            });
+            if (it != registeredPlayers.end()) {
+                currentPlayer = &(*it);
+                cout << "Welcome back, " << name << "!" << endl;
+                cout << "Press enter to continue..." << endl;
+                selectedPlayer = true;
+            }
+            else {
+                cout << "Player not found. Please try again." << endl;
+            }
+            cin.ignore();
+            cin.get();
+            selectedPlayer = true;
+            
+        }
+        else {
+            cout << "Invalid choice. Please try again." << endl;
+        }
+
+    } while (selectedPlayer == false);
+}
+
 void playGame() {
+    playerSelection();
     do {
         clearScreen();
         cout << "Select which game you would like to play: " << endl;
@@ -123,9 +223,10 @@ void mainMenu () {
         cout << endl;
         cout << "Please select an option:" << endl;
         cout << "1. Play" << endl;
-        cout << "2. About the program" << endl;
-        cout << "3. Options" << endl;
-        cout << "4. Quit" << endl;
+        cout << "2. Players and Score" << endl;
+        cout << "3. About the program" << endl;
+        cout << "4. Options" << endl;
+        cout << "5. Quit" << endl;
         cout << endl;
         cout << "Choice: ";
         int choice;
@@ -142,6 +243,9 @@ void mainMenu () {
                 displayOptions();
                 break;
             case 4:
+                
+                break;
+            case 5:
                 gameIsRunning = false;
                 break;
             default:
