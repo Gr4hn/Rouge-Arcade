@@ -18,66 +18,104 @@ void displayOptions();
 void mainMenu();
 void sleepForSeconds(int seconds);
 void clearScreen();
+void playgame();
 
 bool gameIsRunning = true;
 bool selectionOfGame = true;
 
 class Game {
+
     public:
 
-    void playGame() {
-        clearScreen();
-        do {
-            cout << "Select which game you would like to play: " << endl;
 
-            cout << "1. Snake" << endl;
-            cout << "2. Tic Tac Toe" << endl;
-            cout << "3. Connect Four" << endl;
-            cout << "4. Hangman" << endl;
-            cout << "5. Return to main menu" << endl << endl;
-
-            cout << "Choice: ";
-            int choiceOfGame;
-            cin >> choiceOfGame;
-            cout << endl;
-            switch (choiceOfGame) {
-                case 1:
-                    cout << "Playing game 1" << endl;
-                    cin.ignore();
-                    cin.get();
-                    break;
-                case 2:
-                    cout << "Playing game 2" << endl;
-                    cin.ignore();
-                    cin.get();
-                    break;
-                case 3:
-                    cout << "Playing game 3" << endl;
-                    cin.ignore();
-                    cin.get();
-                    break;
-                case 4:
-                    cout << "Playing game 4" << endl;
-                    cin.ignore();
-                    cin.get();
-                    break;
-                case 5:
-                    selectionOfGame = false;
-                    break;
-                default:
-                cout << "Invalid choice. Please try again." << endl;
-                break;
-            }
-        } while (selectionOfGame);
-       
-        cout << endl << endl << "Returning to main menu..." << endl;
-        sleepForSeconds(3);
-    }
 };
 
-void mainMenu () {
-    Game game;
+
+
+void sleepForSeconds(int seconds) {
+    Sleep(seconds * 1000);
+}
+
+void clearScreen() {
+    system("cls");
+}
+
+void playGame() {
+    do {
+        clearScreen();
+        cout << "Select which game you would like to play: " << endl;
+
+        cout << "1. Snake" << endl;
+        cout << "2. Tic Tac Toe" << endl;
+        cout << "3. Connect Four" << endl;
+        cout << "4. Hangman" << endl;
+        cout << "5. Return to main menu" << endl << endl;
+
+        cout << "Choice: ";
+        int choiceOfGame;
+        cin >> choiceOfGame;
+        cout << endl;
+        switch (choiceOfGame) {
+            case 1:
+                clearScreen();
+                cout << "Playing game 1" << endl;
+                cin.ignore();
+                cin.get();
+                break;
+            case 2:
+                clearScreen();
+                cout << "Playing game 2" << endl;
+                cin.ignore();
+                cin.get();
+                break;
+            case 3:
+                clearScreen();
+                cout << "Playing game 3" << endl;
+                cin.ignore();
+                cin.get();
+                break;
+            case 4:
+                clearScreen();
+                cout << "Playing game 4" << endl;
+                cin.ignore();
+                cin.get();
+                break;
+            case 5:
+                selectionOfGame = false;
+                break;
+            default:
+            cout << "Invalid choice. Please try again." << endl;
+            sleepForSeconds(2);
+            break;
+        }
+    } while (selectionOfGame);
     
+    cout << endl << endl << "Returning to main menu..." << endl;
+    sleepForSeconds(2);
+}
+
+
+void displayAbout() {
+    clearScreen();
+    cout << "About the program" << endl;
+    cout << "--------------------------------" << endl;
+    cout << endl;
+    cout << "About the program go here" << endl;
+    cin.ignore();
+    cin.get();
+}
+
+void displayOptions() {
+    clearScreen();
+    cout << "Options" << endl;
+    cout << "--------------------------------" << endl;
+    cout << endl;
+    cout << "Options go here" << endl;
+    cin.ignore();
+    cin.get();
+}
+
+void mainMenu () {
     do {
         clearScreen();
         cout << "Main menu" << endl;
@@ -95,7 +133,7 @@ void mainMenu () {
 
         switch (choice) {
             case 1:
-                game.playGame();
+                playGame();
                 break;
             case 2:
                 displayAbout();
@@ -116,33 +154,6 @@ void mainMenu () {
     clearScreen();
     cout << "Thanks for playing!" << endl << endl;
     cout << "Press enter to exit..." << endl;
-    cin.ignore();
-    cin.get();
-}
-
-void sleepForSeconds(int seconds) {
-    Sleep(seconds * 1000);
-}
-
-void clearScreen() {
-    system("cls");
-}
-
-
-
-void displayAbout() {
-    cout << "About the program" << endl;
-    cout << "--------------------------------" << endl;
-    cout << endl;
-    cout << "About the program go here" << endl;
-    cin.ignore();
-    cin.get();
-}
-void displayOptions() {
-    cout << "Options" << endl;
-    cout << "--------------------------------" << endl;
-    cout << endl;
-    cout << "Options go here" << endl;
     cin.ignore();
     cin.get();
 }
