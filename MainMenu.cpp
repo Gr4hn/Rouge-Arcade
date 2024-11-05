@@ -13,7 +13,7 @@
 
 using namespace std;
 
-void displayRules();
+void displayAbout();
 void displayOptions();
 void mainMenu();
 void sleepForSeconds(int seconds);
@@ -85,7 +85,7 @@ void mainMenu () {
         cout << endl;
         cout << "Please select an option:" << endl;
         cout << "1. Play" << endl;
-        cout << "2. Rules" << endl;
+        cout << "2. About the program" << endl;
         cout << "3. Options" << endl;
         cout << "4. Quit" << endl;
         cout << endl;
@@ -98,7 +98,7 @@ void mainMenu () {
                 game.playGame();
                 break;
             case 2:
-                displayRules();
+                displayAbout();
                 break;
             case 3:
                 displayOptions();
@@ -114,7 +114,7 @@ void mainMenu () {
     } while (gameIsRunning);
     
     clearScreen();
-    cout << "Thanks for playing!" << endl;
+    cout << "Thanks for playing!" << endl << endl;
     cout << "Press enter to exit..." << endl;
     cin.ignore();
     cin.get();
@@ -130,11 +130,11 @@ void clearScreen() {
 
 
 
-void displayRules() {
-    cout << "Rules" << endl;
+void displayAbout() {
+    cout << "About the program" << endl;
     cout << "--------------------------------" << endl;
     cout << endl;
-    cout << "Rules go here" << endl;
+    cout << "About the program go here" << endl;
     cin.ignore();
     cin.get();
 }
@@ -149,7 +149,7 @@ void displayOptions() {
 
 int main() {
 
-    cout << "Welcome to X" << endl;
+    cout << "Welcome to E-Arcade" << endl;
     sleepForSeconds(3);
     mainMenu();
     return 0;
