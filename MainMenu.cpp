@@ -10,14 +10,16 @@
 #include <ctime>
 #include <windows.h>
 #include <unistd.h>
+#include "clearScreen.h"
+#include "sleepForSeconds.h"
+#include "Hangman.h"
+#include "loadWordsFromFile.h"
 
 using namespace std;
 
 void displayAbout();
 void displayOptions();
 void mainMenu();
-void sleepForSeconds(int seconds);
-void clearScreen();
 void playgame();
 
 bool gameIsRunning = true;
@@ -75,14 +77,6 @@ class player {
 
 vector<player> registeredPlayers;
 
-
-void sleepForSeconds(int seconds) {
-    Sleep(seconds * 1000);
-}
-
-void clearScreen() {
-    system("cls");
-}
 
 void playerSelection () {
      string choiceOfPlayer;
@@ -265,6 +259,7 @@ void mainMenu () {
 int main() {
 
     cout << "Welcome to E-Arcade" << endl;
+    vector<string>wordsForHangman = loadWordsFromFile("wordsForHangman.txt");
     sleepForSeconds(3);
     mainMenu();
     return 0;
