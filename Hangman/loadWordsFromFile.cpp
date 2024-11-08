@@ -1,5 +1,7 @@
 #include "loadWordsFromFile.h"
     
+
+//Loads words from a the file wordsForHangman.txt and returns them as a vector of strings.
 vector<string> loadWordsFromFile(const string& filename) {
     vector<string> wordsForHangman;
     ifstream file(filename);

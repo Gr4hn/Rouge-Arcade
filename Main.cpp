@@ -13,9 +13,13 @@
 #include <iomanip>
 #include "C:/users/eric/Rouge-Arcade/Basics/clearScreen.h"
 #include "C:/users/eric/Rouge-Arcade/Basics/sleepForSeconds.h"
+#include "C:/users/eric/Rouge-Arcade/Basics/printCentered.h"
+#include "C:/users/eric/Rouge-Arcade/Basics/getConsolewidth.h"
+#include "C:/users/eric/Rouge-Arcade/Basics/paddingSelection.h"
 #include "C:/users/eric/Rouge-Arcade/Hangman/Hangman.h"
 #include "C:/users/eric/Rouge-Arcade/Hangman/loadWordsFromFile.h"
 #include "regPlayers.h"
+
 
 using namespace std;
 
@@ -154,7 +158,11 @@ void mainMenu () {
 }
 
 int main() {
-    cout << "Welcome to Rouge-Arcade" << endl;
+    printCentered("*****************************************");
+    printCentered("*                                       *");
+    printCentered("*       Welcome to Rouge-Arcade!        *");
+    printCentered("*                                       *");
+    printCentered("*****************************************");
     sleepForSeconds(3);
     mainMenu();
     return 0;
