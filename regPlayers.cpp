@@ -9,7 +9,7 @@ void playerSelection () {
     player* currentPlayer = nullptr;
     do {
         clearScreen();
-        cout << "Have you played before?" << endl;
+        cout << "Do you have a registered player?" << endl;
         cout << "Yes or No: ";
         cin >> choiceOfPlayer;
         transform(choiceOfPlayer.begin(), choiceOfPlayer.end(), choiceOfPlayer.begin(), ::tolower);
@@ -56,4 +56,46 @@ void playerSelection () {
         }
 
     } while (selectedPlayer == false);
+}
+
+void displayInfo() {
+    string playerName;
+    do {
+        clearScreen();
+        cout << "Players and their levels: " << endl;
+        for (int i = 0; i < registeredPlayers.size(); i++) {
+            registeredPlayers[i].displayPlayerInfo();
+            cout << endl;
+        }
+        cout << "Enter a name in order to see the scores, or press enter to go back to the main menu: ";
+        cin.ignore();
+        getline(cin, playerName);
+        if (!playerName.empty()) {
+            displayPlayerScore(playerName);
+            cin.ignore();
+            cin.get();
+        }
+    } while (!playerName.empty());
+    printCentered("Returning to main menu...");
+    sleepForSeconds(2);
+}
+void displayPlayerScore(const string& playerName ) {
+    bool playerFound = false;
+    for (const auto& player : registeredPlayers) {
+        if (player.getName() == playerName) {
+            player.displayScores(playerName);
+            playerFound = true;
+            cout << "Press enter to continue..." << endl;
+            cin.ignore();
+            cin.get();
+            break;
+            
+        }
+    }
+    if (!playerFound) {
+        cout << "Player not found." << endl;
+        cout << "Press enter to continue..." << endl;
+        cin.ignore();
+        cin.get();
+    }
 }

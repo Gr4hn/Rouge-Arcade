@@ -5,15 +5,20 @@
 #include <vector>
 #include <algorithm>
 #include "C:/users/eric/Rouge-Arcade/Basics/clearScreen.h"
+#include "C:/users/eric/Rouge-Arcade/Basics/sleepForSeconds.h"
+#include "C:/users/eric/Rouge-Arcade/Basics/printCentered.h"
 
 using namespace std;
 
 void playerSelection();
+void displayInfo();
+void displayScores();
+void displayPlayerScore(const string& playerName );
 
 class player {
     private:
-    int scoreInSnake = 0;
-    int scoreInTicTacToe = 0;
+    int scoreInSnake;
+    int scoreInTicTacToe;
     int scoreInConnectFour;
     int scoreInHangman;
     int level;
@@ -22,7 +27,7 @@ class player {
     
 
     public:
-    player(string name, int score, int level) {
+    player(const string name, int score, int level) {
         this->name = name;
         this->level = level;
     }
@@ -45,13 +50,9 @@ class player {
     }
     void displayPlayerInfo() {
         cout << "Name: " << name << endl;
-        cout << "Score: " << scoreInSnake << endl;
-        cout << "Score: " << scoreInTicTacToe << endl;
-        cout << "Score: " << scoreInConnectFour << endl;
-        cout << "Score: " << scoreInHangman << endl;
         cout << "Level: " << level << endl;
     }
-    void displayScores() {
+    void displayScores(const string& playerName) const {
         cout << "Scores:" << endl;
         cout << "Snake: " << scoreInSnake << endl;
         cout << "TicTacToe: " << scoreInTicTacToe << endl;

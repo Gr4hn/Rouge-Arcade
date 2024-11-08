@@ -30,13 +30,17 @@ void playGame();
 
 bool gameIsRunning = true;
 bool selectionOfGame = true;
+bool isPlayerSelected = false;
 
+// Main function for the choice of game
 void playGame() {
     string guessString;
     bool roundIsRunning = true;
-    playerSelection();
+    if (!isPlayerSelected) {
+        playerSelection();
+        isPlayerSelected = true;
+    }
     do {
-        vector<string>wordsForHangman = loadWordsFromFile("C:/users/eric/Rouge-Arcade/Hangman/wordsForHangman.txt");
         clearScreen();
         cout << "Select which game you would like to play: " << endl;
 
@@ -45,38 +49,51 @@ void playGame() {
         cout << "3. Connect Four" << endl;
         cout << "4. Hangman" << endl;
         cout << "5. Return to main menu" << endl << endl;
+        cout << "6. Select player" << endl;
 
         cout << "Choice: ";
         int choiceOfGame;
         cin >> choiceOfGame;
         cout << endl;
+        
+        vector<string> wordsForHangman;
         switch (choiceOfGame) {
             case 1:
                 clearScreen();
                 cout << "Playing game 1" << endl;
+                //Snake(); Goes here
                 cin.ignore();
                 cin.get();
                 break;
             case 2:
                 clearScreen();
                 cout << "Playing game 2" << endl;
+                //TicTacToe(); Goes here
                 cin.ignore();
                 cin.get();
                 break;
             case 3:
                 clearScreen();
                 cout << "Playing game 3" << endl;
+                //ConnectFour(); Goes here
                 cin.ignore();
                 cin.get();
                 break;
             case 4:
+                wordsForHangman = loadWordsFromFile("C:/users/eric/Rouge-Arcade/Hangman/wordsForHangman.txt");
                 clearScreen();
                 cout << "Playing game 4" << endl;
                 sleepForSeconds(2);
+                //Maybe add a function to display the rules of the game here?
                 playHangman(wordsForHangman, guessString, roundIsRunning);
                 break;
             case 5:
+                // Return to main menu
                 selectionOfGame = false;
+                break;
+            case 6:
+                clearScreen();
+                playerSelection();
                 break;
             default:
             cout << "Invalid choice. Please try again." << endl;
@@ -89,7 +106,7 @@ void playGame() {
     sleepForSeconds(2);
 }
 
-
+// Displays the about screen
 void displayAbout() {
     clearScreen();
     cout << "About the program" << endl;
@@ -100,6 +117,7 @@ void displayAbout() {
     cin.get();
 }
 
+// Displays the options screen
 void displayOptions() {
     clearScreen();
     cout << "Options" << endl;
@@ -110,11 +128,13 @@ void displayOptions() {
     cin.get();
 }
 
+// Displays the main menu
 void mainMenu () {
+    
     do {
         clearScreen();
-        cout << "Main menu" << endl;
-        cout << "--------------------------------" << endl;
+        printCentered("Main menu"); cout << endl;
+        printCentered("--------------------------------"); cout << endl;
         cout << endl;
         cout << "Please select an option:" << endl;
         cout << "1. Play" << endl;
@@ -127,20 +147,27 @@ void mainMenu () {
         int choice;
         cin >> choice;
 
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
         switch (choice) {
             case 1:
                 playGame();
                 break;
             case 2:
-                displayAbout();
+                //Display players and score
+                clearScreen();
+                cout << endl;
+                displayInfo();
                 break;
             case 3:
-                displayOptions();
+                displayAbout();
                 break;
             case 4:
-                
+                displayOptions();
                 break;
             case 5:
+                //Quits the program
                 gameIsRunning = false;
                 break;
             default:
@@ -157,7 +184,9 @@ void mainMenu () {
     cin.get();
 }
 
+// Start and end function for the program
 int main() {
+    bool isPlayerSelected = false;
     printCentered("*****************************************");
     printCentered("*                                       *");
     printCentered("*       Welcome to Rouge-Arcade!        *");
