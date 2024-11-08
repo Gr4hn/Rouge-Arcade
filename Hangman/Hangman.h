@@ -1,8 +1,7 @@
 #ifndef HANGMAN_H
 #define HANGMAN_H
-#include "clearScreen.h"
-#include "sleepForSeconds.h"
-#include "loadWordsFromFile.h"
+#include "C:/users/eric/Rouge-Arcade/Basics/clearScreen.h"
+#include "C:/users/eric/Rouge-Arcade/Basics/sleepForSeconds.h"
 #include <iostream>
 #include <string>
 #include <vector>
@@ -14,8 +13,12 @@
 #include <fstream>
 
 
-
 using namespace std;
+
+void endRunningRound(bool& roundIsRunning);
+void playHangman(vector<string>& wordsForHangman, string& guessString, bool& roundIsRunning);
+string Randomizer(vector<string> list);
+
 
 class Game
 {
