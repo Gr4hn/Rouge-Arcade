@@ -9,9 +9,10 @@ void playerSelection () {
     player* currentPlayer = nullptr;
     do {
         clearScreen();
-        cout << "Do you have a registered player?" << endl;
+        cout << "Do you have a registered player?" << endl << endl;
         cout << "Yes or No: ";
         cin >> choiceOfPlayer;
+        cout << endl;
         transform(choiceOfPlayer.begin(), choiceOfPlayer.end(), choiceOfPlayer.begin(), ::tolower);
         if (choiceOfPlayer == "no") {
             cout << "Enter your name: ";
@@ -20,6 +21,7 @@ void playerSelection () {
             registeredPlayers.push_back(player(name, 1, 0));
             currentPlayer = &registeredPlayers.back();
             selectedPlayer = true;
+            cout << endl << endl;
             cout << "Welcome, " << name << "!" << endl;
             cout << "You have been registered." << endl;
             cout << "Press enter to continue..." << endl;
@@ -67,12 +69,12 @@ void displayInfo() {
             registeredPlayers[i].displayPlayerInfo();
             cout << endl;
         }
-        cout << "Enter a name in order to see the scores, or press enter to go back to the main menu: ";
-        cin.ignore();
+        cout << "Enter a name in order to see the scores." << endl;
+        cout << "Or press enter to go back to the main menu " << endl;
+        cout << "Enter a name: ";
         getline(cin, playerName);
         if (!playerName.empty()) {
             displayPlayerScore(playerName);
-            cin.ignore();
             cin.get();
         }
     } while (!playerName.empty());
@@ -81,21 +83,17 @@ void displayInfo() {
 }
 void displayPlayerScore(const string& playerName ) {
     bool playerFound = false;
+    cout << endl << "Searching for player: " << playerName << endl;
+    sleepForSeconds(2);
     for (const auto& player : registeredPlayers) {
         if (player.getName() == playerName) {
             player.displayScores(playerName);
             playerFound = true;
-            cout << "Press enter to continue..." << endl;
-            cin.ignore();
-            cin.get();
             break;
-            
         }
     }
     if (!playerFound) {
         cout << "Player not found." << endl;
-        cout << "Press enter to continue..." << endl;
-        cin.ignore();
-        cin.get();
     }
+    cout << endl << "Press enter to continue..." << endl;
 }

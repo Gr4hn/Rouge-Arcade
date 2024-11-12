@@ -1,4 +1,6 @@
 #include "loadWordsFromFile.h"
+
+using  namespace std;
     
 
 //Loads words from a the file wordsForHangman.txt and returns them as a vector of strings.
@@ -16,5 +18,6 @@ vector<string> loadWordsFromFile(const string& filename) {
             wordsForHangman.push_back(word);
         }
     }
+    
     return wordsForHangman;
 }

@@ -17,7 +17,7 @@ void playHangman(vector<string>& wordsForHangman, string& guessString, bool& rou
     int attempts = 0;
     while(!game.endOfAttempts()) {
         game.displayStatus();
-            cout << endl <<"Gissa en bokstav eller ord: ";
+            cout << endl <<"Guess a word or a letter: ";
         cin >> guessString;
             if(guessString == "0") {
                 endRunningRound(roundIsRunning);
@@ -25,12 +25,12 @@ void playHangman(vector<string>& wordsForHangman, string& guessString, bool& rou
         }
         if(!game.guess(guessString[0], guessString) || game.hasGuessedString) { // Behövs guessString här egentligen? Det är ju bara en bokstav som ska gissas och om det är en string ska vi hoppa direkt till förkorat eller vunnit?
             if (!game.hasGuessedString) {
-                cout << "Fel gissning!" << endl;
+                cout << "Wrong guess!" << endl;
                 sleepForSeconds(2);
             }
         } else {
             if (!game.hasGuessedString) {
-                cout << "R\u00E4tt gissning!" << endl;
+                cout << "Correct guess!" << endl;
                 sleepForSeconds(2);
             }
         }
@@ -38,10 +38,10 @@ void playHangman(vector<string>& wordsForHangman, string& guessString, bool& rou
         if(game.win()) { // Den här körs när man har gissat rätt bokstäver.
             game.win();
             int attempts = game.incorrectGuesses.size();
-            cout << "Grattis! Du vann! " << "Du gissade r\u00E4tt ord: " << randomWord << endl;
-            cout << "Antal felgissningar: " <<  attempts << endl;
+            cout << "Congratulations! You won! " <<  "You guessed: " << randomWord << endl;
+            cout << "The number of wrong guesses: " <<  attempts << endl;
             cout << endl;
-            cout << "Tryck p\u00E5 valfri tangent f\u00F6r att forts\u00E4tta" << endl;
+            cout << "Enter a key of your choice to continue..." << endl;
             cin.ignore();
             cin.get();
             break;
@@ -49,8 +49,8 @@ void playHangman(vector<string>& wordsForHangman, string& guessString, bool& rou
     }
 
     if(!game.win() && !game.hasGuessedString) { // Den här körs när man har gissat på hela ordet och får korrekt, vilket den inte ska
-        cout << "Spelet \u00E4r \u00F6ver! Ordet var: " << randomWord << endl
-        << "Tryck p\u00E5 valfri tangent f\u00F6r att forts\u00E4tta" << endl;
+        cout << "Game over! The word was: " << randomWord << endl
+        << "Enter a key of your choice to continue..." << endl;
         cin.ignore();
         cin.get();
     }

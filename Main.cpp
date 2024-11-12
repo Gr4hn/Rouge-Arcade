@@ -41,6 +41,9 @@ void playGame() {
         isPlayerSelected = true;
     }
     do {
+        vector<string> wordsForHangman;
+
+
         clearScreen();
         cout << "Select which game you would like to play: " << endl;
 
@@ -56,31 +59,31 @@ void playGame() {
         cin >> choiceOfGame;
         cout << endl;
         
-        vector<string> wordsForHangman;
         switch (choiceOfGame) {
             case 1:
+                //Snake(); Goes here
                 clearScreen();
                 cout << "Playing game 1" << endl;
-                //Snake(); Goes here
                 cin.ignore();
                 cin.get();
                 break;
             case 2:
+                //TicTacToe(); Goes here
                 clearScreen();
                 cout << "Playing game 2" << endl;
-                //TicTacToe(); Goes here
                 cin.ignore();
                 cin.get();
                 break;
             case 3:
+                //ConnectFour(); Goes here
                 clearScreen();
                 cout << "Playing game 3" << endl;
-                //ConnectFour(); Goes here
                 cin.ignore();
                 cin.get();
                 break;
             case 4:
-                wordsForHangman = loadWordsFromFile("C:/users/eric/Rouge-Arcade/Hangman/wordsForHangman.txt");
+                //Plays the game Hangman
+                wordsForHangman = loadWordsFromFile("Hangman/wordsForHangman.txt");
                 clearScreen();
                 cout << "Playing game 4" << endl;
                 sleepForSeconds(2);
@@ -88,12 +91,13 @@ void playGame() {
                 playHangman(wordsForHangman, guessString, roundIsRunning);
                 break;
             case 5:
-                // Return to main menu
-                selectionOfGame = false;
-                break;
-            case 6:
+                //The player can reselect their player
                 clearScreen();
                 playerSelection();
+                break;
+            case 6:
+                //Return to main menu
+                selectionOfGame = false;
                 break;
             default:
             cout << "Invalid choice. Please try again." << endl;
@@ -109,22 +113,20 @@ void playGame() {
 // Displays the about screen
 void displayAbout() {
     clearScreen();
-    cout << "About the program" << endl;
-    cout << "--------------------------------" << endl;
+    printCentered("About the program"); cout << endl;
+    printCentered("--------------------------------"); cout << endl;
     cout << endl;
     cout << "About the program go here" << endl;
-    cin.ignore();
     cin.get();
 }
 
 // Displays the options screen
 void displayOptions() {
     clearScreen();
-    cout << "Options" << endl;
-    cout << "--------------------------------" << endl;
+    printCentered("Options"); cout << endl;
+    printCentered("--------------------------------"); cout << endl;
     cout << endl;
     cout << "Options go here" << endl;
-    cin.ignore();
     cin.get();
 }
 
@@ -141,8 +143,9 @@ void mainMenu () {
         cout << "2. Players and Score" << endl;
         cout << "3. About the program" << endl;
         cout << "4. Options" << endl;
-        cout << "5. Quit" << endl;
-        cout << endl;
+        cout << "5. Select player" << endl;
+        cout << "6. Quit" << endl;
+        cout << endl << endl;
         cout << "Choice: ";
         int choice;
         cin >> choice;
@@ -161,12 +164,20 @@ void mainMenu () {
                 displayInfo();
                 break;
             case 3:
+                //Display about screen
                 displayAbout();
                 break;
             case 4:
+                //Display options screen
                 displayOptions();
                 break;
             case 5:
+                //Select player from list or add new player
+                isPlayerSelected = false;
+                playerSelection();
+                isPlayerSelected = true;
+                break;
+            case 6:
                 //Quits the program
                 gameIsRunning = false;
                 break;

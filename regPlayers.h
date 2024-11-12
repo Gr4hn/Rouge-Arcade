@@ -22,7 +22,6 @@ class player {
     int scoreInConnectFour;
     int scoreInHangman;
     int level;
-
     string name;
     
 
@@ -30,6 +29,10 @@ class player {
     player(const string name, int score, int level) {
         this->name = name;
         this->level = level;
+        this->scoreInSnake = 0;
+        this->scoreInTicTacToe = 0;
+        this->scoreInConnectFour = 0;
+        this->scoreInHangman = 0;
     }
 
     string getName() const {
@@ -46,7 +49,7 @@ class player {
             scoreInHangman += score;
         }
         // Update level based on some criteria, for example:
-        level = (scoreInSnake + scoreInTicTacToe + scoreInConnectFour + scoreInHangman) / 100;
+        level = (scoreInSnake + scoreInTicTacToe + scoreInConnectFour + scoreInHangman) / 10;
     }
     void displayPlayerInfo() {
         cout << "Name: " << name << endl;
