@@ -11,13 +11,13 @@
 #include <windows.h>
 #include <unistd.h>
 #include <iomanip>
-#include "C:/users/eric/Rouge-Arcade/Basics/clearScreen.h"
-#include "C:/users/eric/Rouge-Arcade/Basics/sleepForSeconds.h"
-#include "C:/users/eric/Rouge-Arcade/Basics/printCentered.h"
-#include "C:/users/eric/Rouge-Arcade/Basics/getConsolewidth.h"
-#include "C:/users/eric/Rouge-Arcade/Basics/paddingSelection.h"
-#include "C:/users/eric/Rouge-Arcade/Hangman/Hangman.h"
-#include "C:/users/eric/Rouge-Arcade/Hangman/loadWordsFromFile.h"
+#include "Basics/clearScreen.h"
+#include "Basics/sleepForSeconds.h"
+#include "Basics/printCentered.h"
+#include "Basics/getConsolewidth.h"
+#include "Basics/paddingSelection.h"
+#include "Hangman/Hangman.h"
+#include "Hangman/loadWordsFromFile.h"
 #include "regPlayers.h"
 
 
