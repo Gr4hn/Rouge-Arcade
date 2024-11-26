@@ -11,14 +11,14 @@
 #include <windows.h>
 #include <unistd.h>
 #include <iomanip>
-#include "Basics/clearScreen.h"
-#include "Basics/sleepForSeconds.h"
-#include "Basics/printCentered.h"
-#include "Basics/getConsolewidth.h"
-#include "Basics/paddingSelection.h"
-#include "Hangman/Hangman.h"
-#include "Hangman/loadWordsFromFile.h"
-#include "regPlayers.h"
+#include "clearScreen.h"
+#include "sleepForSeconds.h"
+#include "printCentered.h"
+#include "getConsolewidth.h"
+#include "paddingSelection.h"
+#include "hangman/Hangman.h"
+#include "hangman/loadWordsFromFile.h"
+#include "players/regPlayers.h"
 
 
 using namespace std;

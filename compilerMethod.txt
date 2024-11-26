@@ -1,2 +1,0 @@
-## Compiler Method for current build
-g++ -o Rouge-Arcade C:/users/eric/rouge-arcade/Main.cpp C:/users/eric/rouge-arcade/basics/clearScreen.cpp ConnectFourGame.cpp C:/users/eric/rouge-arcade/hangman/Hangman.cpp C:/users/eric/rouge-arcade/basics/sleepForSeconds.cpp SnakeGame.cpp TicTacToeGame.cpp C:/users/eric/rouge-arcade/hangman/loadWordsFromFile.cpp C:/users/eric/rouge-arcade/basics/printCentered.cpp C:/users/eric/rouge-arcade/basics/getConsoleWidth.cpp C:/users/eric/rouge-arcade/basics/paddingSelection.cpp regplayers.cpp

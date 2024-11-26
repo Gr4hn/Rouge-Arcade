@@ -1,12 +1,15 @@
 #include "regPlayers.h"
+#include "basicsForPlayers.h"
 
 
-vector<player> registeredPlayers;
+list<Player> registeredPlayers;
 
 void playerSelection () {
     string choiceOfPlayer;
     bool selectedPlayer = false;
-    player* currentPlayer = nullptr;
+    Player* currentPlayer = nullptr;
+    list<Player>::iterator it;
+
     do {
         clearScreen();
         cout << "Do you have a registered player?" << endl << endl;
@@ -17,8 +20,8 @@ void playerSelection () {
         if (choiceOfPlayer == "no") {
             cout << "Enter your name: ";
             string name;
-            cin >> name;
-            registeredPlayers.push_back(player(name, 1, 0));
+            cin >> name; 
+            registeredPlayers.push_back(Player(name));
             currentPlayer = &registeredPlayers.back();
             selectedPlayer = true;
             cout << endl << endl;
@@ -29,14 +32,12 @@ void playerSelection () {
             cin.get();
         }
         else if (choiceOfPlayer == "yes") {
-            cout << "Current registered players: " << endl;
-            for (int i = 0; i < registeredPlayers.size(); i++) {
-                cout << registeredPlayers[i].getName() << endl;
-            }
+
+            currentP();
             cout << "Enter your name player: ";
             string name;
             cin >> name;
-            auto it = find_if(registeredPlayers.begin(), registeredPlayers.end(), [&name](const player& p) {
+            auto it = find_if(registeredPlayers.begin(), registeredPlayers.end(), [&name](const Player& p) {
                 return p.getName() == name;
             });
             if (it != registeredPlayers.end()) {
@@ -50,8 +51,6 @@ void playerSelection () {
             }
             cin.ignore();
             cin.get();
-            selectedPlayer = true;
-            
         }
         else {
             cout << "Invalid choice. Please try again." << endl;
@@ -65,10 +64,7 @@ void displayInfo() {
     do {
         clearScreen();
         cout << "Players and their levels: " << endl;
-        for (int i = 0; i < registeredPlayers.size(); i++) {
-            registeredPlayers[i].displayPlayerInfo();
-            cout << endl;
-        }
+        currentP();
         cout << "Enter a name in order to see the scores." << endl;
         cout << "Or press enter to go back to the main menu " << endl;
         cout << "Enter a name: ";
@@ -87,7 +83,7 @@ void displayPlayerScore(const string& playerName ) {
     sleepForSeconds(2);
     for (const auto& player : registeredPlayers) {
         if (player.getName() == playerName) {
-            player.displayScores(playerName);
+            player.displayScores();
             playerFound = true;
             break;
         }
@@ -97,3 +93,35 @@ void displayPlayerScore(const string& playerName ) {
     }
     cout << endl << "Press enter to continue..." << endl;
 }
+
+Player::Player(string name) {
+        this->name = name;
+        this->level = 0;
+        this->scoreInSnake = 0;
+        this->scoreInTicTacToe = 0;
+        this->scoreInConnectFour = 0;
+        this->scoreInHangman = 0;
+    }
+
+    string Player::getName() const {
+        return name;
+    }
+
+    string Player::setName(const string& name) {
+        this->name = name;
+        cout << "Name has been set to: " << name << endl;
+        return name;
+    }
+    
+    void Player::displayPlayerInfo() const {
+        cout << "Name: " << this->name << endl;
+        cout << "Level: " << this->level << endl;
+    }
+    void Player::displayScores() const {
+        cout << "Scores:" << endl;
+        cout << "Snake: " << scoreInSnake << endl;
+        cout << "TicTacToe: " << scoreInTicTacToe << endl;
+        cout << "ConnectFour: " << scoreInConnectFour << endl;
+        cout << "Hangman: " << scoreInHangman << endl;
+        cout << "Level: " << level << endl;
+    }

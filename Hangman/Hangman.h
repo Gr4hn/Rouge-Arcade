@@ -1,7 +1,7 @@
 #ifndef HANGMAN_H
 #define HANGMAN_H
-#include "Basics/clearScreen.h"
-#include "Basics/sleepForSeconds.h"
+#include "clearScreen.h"
+#include "sleepForSeconds.h"
 #include <iostream>
 #include <string>
 #include <vector>
