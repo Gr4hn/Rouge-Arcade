@@ -1,5 +1,8 @@
 #include "regPlayers.h"
 #include "basicsForPlayers.h"
+#include "json.hpp"
+
+
 
 
 list<Player>::iterator it;
@@ -224,20 +227,27 @@ string Player::toString()  {
 
   
     
-json loadPlayers (string &ptrDataBase, list<Player> &registeredPlayers) {
+json loadPlayers (const string &ptrDataBase, list<Player> &registeredPlayers) {
     try {
-        ifstream file(ptrDataBase);
-/*         if (!file.is_open()) {
-            throw runtime_error("The file wasn't opened...");
-        } */
+        cout << "Attempting to open file: " << ptrDataBase << endl;
 
-        json jsonFile;
-        file >> jsonFile;
-        for (const auto& player : jsonFile) {
-            registeredPlayers.push_back(Player(player));
+        ifstream file(ptrDataBase);
+        if (file.is_open()) {
+            if (file.peek() == ifstream::traits_type::eof()) {
+                cout << "The file is empty. No players loaded." << endl;
+                return json();
+            } 
+            json jsonFile;
+            file >> jsonFile;
+            for (const auto& player : jsonFile) {
+                registeredPlayers.push_back(Player(player));
+            }
+            file.close();
+            return jsonFile;
         }
-        file.close();
-        return jsonFile;
+        else {
+            throw runtime_error("The file wasn't opened..." + ptrDataBase); 
+        }
     } catch (const exception& e) {
         cout << "Error: " << e.what() << endl << endl;
         return json(); // Return an empty JSON object on error
@@ -248,12 +258,11 @@ json savePlayers (string &ptrDataBase, list<Player> &registeredPlayers) {
     
     try {
         ofstream file(ptrDataBase);
-/*         if (!file.is_open()) {
-            throw runtime_error("The file wasn't opened...");
-        } */
+        if (file.is_open()) {
 
-        json jsonFile;
-        for (auto& player : registeredPlayers) {
+
+            json jsonFile;
+            for (auto& player : registeredPlayers) {
 
             json playerJson;
             playerJson["name"] = player.getName();
@@ -268,10 +277,20 @@ json savePlayers (string &ptrDataBase, list<Player> &registeredPlayers) {
         file << jsonFile.dump(4);
         file.close();
         return jsonFile;
+
+        } 
+        else {
+            throw runtime_error("The file wasn't opened...");
+        }
     } catch (exception& e) {
         cout << "Error: " << e.what() << endl;
         return json(); // Return an empty JSON object on error
     }
 }
 
+void peakPlayers (ifstream &file) {
+    if (file.peek() == ifstream::traits_type::eof()) {
+        cout << "The file is empty. No players loaded." << endl;
+    } 
+}
     

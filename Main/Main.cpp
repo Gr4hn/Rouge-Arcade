@@ -14,6 +14,7 @@
 #include <thread>
 #include <chrono>
 #include <mutex>
+#include <filesystem>
 #include "clearScreen.h"
 #include "sleepForSeconds.h"
 #include "printCentered.h"
@@ -22,10 +23,11 @@
 #include "Hangman.h"
 #include "loadWordsFromFile.h"
 #include "regPlayers.h"
-#include "C:\Users\Eric\OneDrive\Utbildning\Chas-Academy\SUVX24\Myown\Nlohmann-JSON/json.hpp"
-
+#include "json.hpp"
 
 using namespace std;
+using json = nlohmann::json;
+
 
 void displayAbout();
 void displayOptions();
@@ -200,19 +202,26 @@ void mainMenu (list<Player> &registeredPlayers, string &ptrDataBase) {
 }
 
 // Start and end function for the program
+/**
+ * @brief Currently the savePlayers function is not working as intended. 
+ * It is saving the players to the file, but does it x2 for some reason.
+ * 
+ * @return int 
+ */
 int main() {
-    bool isPlayerSelected = false;
+    isPlayerSelected = false;
     list<Player> registeredPlayers;
-    string DataBase = "Players/players.json";
+    string DataBase = "Players\\players.json";
     string *ptrDataBase = &DataBase;
-    loadPlayers(*ptrDataBase, registeredPlayers);
+    //loadPlayers(*ptrDataBase, registeredPlayers);
     printCentered("*****************************************");
     printCentered("*                                       *");
     printCentered("*       Welcome to Rouge-Arcade!        *");
     printCentered("*                                       *");
     printCentered("*****************************************");
-    if (registeredPlayers.empty()) {
-        cout << "No players found. Please add a player." << endl;
+    cout << endl;
+
+    if (loadPlayers(*ptrDataBase, registeredPlayers).empty()) {
         cin.get();
         playerSelection(registeredPlayers, *ptrDataBase);
     }
