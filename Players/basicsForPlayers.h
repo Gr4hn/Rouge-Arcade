@@ -8,17 +8,17 @@
 using namespace std;
 
 
-void currentP() {
+void currentP(list<Player> &registeredPlayers) {
     cout << "Current registered players: " << endl;
-    for (const auto& Player : registeredPlayers) {
+    for (auto& Player : registeredPlayers) {
         Player.displayPlayerInfo();
         cout << endl;
     }
 }
 
-void currentS() {
+void currentS(list<Player> &registeredPlayers) {
     cout << "Current registered players: " << endl;
-    for (const auto& Player : registeredPlayers) {
+    for (auto& Player : registeredPlayers) {
         Player.displayScores();
         cout << endl;
     }

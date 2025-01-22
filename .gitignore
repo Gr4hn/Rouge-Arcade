@@ -1,5 +1,0 @@
-# Ignore local .vscode settings
-.vscode/*
-
-# Ignore the .exe files
-*.exe

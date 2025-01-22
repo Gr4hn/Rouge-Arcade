@@ -5,16 +5,15 @@
 #include <vector>
 #include <algorithm>
 #include <list>
+#include <fstream>
 #include "clearScreen.h"
 #include "sleepForSeconds.h"
 #include "printCentered.h"
+#include "C:\Users\Eric\chas-academy\Myown\Nlohmann-JSON\json.hpp"
 
+using namespace nlohmann;
 using namespace std;
 
-void playerSelection();
-void displayInfo();
-void displayScores();
-void displayPlayerScore(const string& playerName );
 
 class Player {
     private:
@@ -27,16 +26,43 @@ class Player {
     
 
     public:
-    Player(const string name);
-    string getName() const; 
-    string setName(const string& name);
+    Player(string& name);
+    Player();
+    Player(const json& playerJson);
     
-    void displayPlayerInfo() const;
 
-    void displayScores() const;
+    string getName() ; 
+    string setName(string& name);
+    int getLevel();
+    int setLevel(int level);
+    int getScoreInSnake();
+    int setScoreInSnake(int scoreInSnake);
+    int getScoreInTicTacToe();
+    int setScoreInTicTacToe(int scoreInTicTacToe);
+    int getScoreInConnectFour();
+    int setScoreInConnectFour(int scoreInConnectFour);
+    int getScoreInHangman();
+    int setScoreInHangman(int scoreInHangman);
+
+    
+    void displayPlayerInfo() ;
+
+    void displayScores() ;
+
+    string toString() ;
+
+    //json loadPlayers(const string& DataBase);
 };
 
-extern list<Player> registeredPlayers;
+void playerSelection(list<Player> &registeredPlayers, string &ptrDataBase);
+void displayInfo(list<Player> &registeredPlayers);
+void displayScores();
+void displayPlayerScore(string &playerName, list<Player> &registeredPlayers);
+json loadPlayers(string &ptrDataBase, list<Player> &registeredPlayers);
+json savePlayers(string &ptrDataBase, list<Player> &registeredPlayers);
+
+//extern list<Player> registeredPlayers;
+extern list<Player>::iterator it;
 
 
 
