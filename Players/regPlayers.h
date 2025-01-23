@@ -31,7 +31,7 @@ class Player {
     Player(const json& playerJson);
     
 
-    string getName() ; 
+    string getName(); 
     string setName(string& name);
     int getLevel();
     int setLevel(int level);
@@ -54,7 +54,7 @@ class Player {
     //json loadPlayers(const string& DataBase);
 };
 
-void playerSelection(list<Player> &registeredPlayers, string &ptrDataBase);
+void playerSelection(list<Player> &registeredPlayers, string &ptrDataBase, Player *&currentPlayer);
 void displayInfo(list<Player> &registeredPlayers);
 void displayScores();
 void displayPlayerScore(string &playerName, list<Player> &registeredPlayers);

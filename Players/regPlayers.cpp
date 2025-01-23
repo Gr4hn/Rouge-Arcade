@@ -8,23 +8,25 @@
 list<Player>::iterator it;
 
 
-void playerSelection (list<Player> &registeredPlayers, string &ptrDataBase) {
+void playerSelection (list<Player> &registeredPlayers, string &ptrDataBase, Player *&currentPlayer) {
     int choice;
     string choiceOfPlayer;
     bool selectedPlayer = false;
-    Player *currentPlayer = nullptr;
+    clearScreen();
 
-    //There is an error in this part of the code, it is not working properly.
+
     do {
         clearScreen();
-        cout << "Currently selected player: " << endl;
+        cout << "Currently selected player: ";
         if (currentPlayer == nullptr) {
-            cout << "Player not found." << endl;
-            sleepForSeconds(2);
-        }
+            cout << "No player is selected..." << endl;
+        }  
         else {
             cout << currentPlayer->getName() << endl;
         }
+
+/*         cout << "Currently selected player: " << endl
+        << currentPlayer->getName() << endl; */
 
         cout << endl << "Press 1 to select a player." << endl << "Press 2 to add a new player." 
         << endl << "Press 3 to go back to the main menu." << endl
@@ -62,12 +64,22 @@ void playerSelection (list<Player> &registeredPlayers, string &ptrDataBase) {
                 clearScreen();
                 cout << "Enter the name of the new player: ";
                 cin >> choiceOfPlayer;
+                for (auto& player : registeredPlayers) {
+                    if (player.getName() == choiceOfPlayer) {
+                        cout << "Player already exists, player has  been set to " << choiceOfPlayer << endl;
+                        sleepForSeconds(2);
+                        selectedPlayer = true;
+                        currentPlayer = &player;
+                        return;
+                    }
+                }
                 registeredPlayers.push_back(Player(choiceOfPlayer));
                 currentPlayer = &registeredPlayers.back();
                 savePlayers(ptrDataBase, registeredPlayers);
                 cout << "Welcome, " << currentPlayer->getName() << "!" << endl
                 << "You have been added to the list of registered players." << endl;
                 selectedPlayer = true;
+                currentPlayer = &registeredPlayers.back();
                 sleepForSeconds(2);
                 break;
             case 3:
@@ -79,7 +91,7 @@ void playerSelection (list<Player> &registeredPlayers, string &ptrDataBase) {
                 sleepForSeconds(2);
                 break;
         }
-    } while (selectedPlayer == false);
+    } while (currentPlayer == nullptr || selectedPlayer == false);
 }
 
 
@@ -237,8 +249,12 @@ json loadPlayers (const string &ptrDataBase, list<Player> &registeredPlayers) {
                 cout << "The file is empty. No players loaded." << endl;
                 return json();
             } 
+
+            registeredPlayers.clear();
+
             json jsonFile;
             file >> jsonFile;
+            
             for (const auto& player : jsonFile) {
                 registeredPlayers.push_back(Player(player));
             }

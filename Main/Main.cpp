@@ -31,20 +31,18 @@ using json = nlohmann::json;
 
 void displayAbout();
 void displayOptions();
-void mainMenu(list<Player> &registeredPlayers, string &ptrDataBase);
-void playGame(list<Player> &registeredPlayers, string &ptrDataBase);
+void mainMenu(list<Player> &registeredPlayers, string &ptrDataBase, Player *currentPlayer);
+void playGame(list<Player> &registeredPlayers, string &ptrDataBase, Player *currentPlayer);
 
 bool gameIsRunning = true;
 bool selectionOfGame = true;
-bool isPlayerSelected = false;
 
 // Main function for the choice of game
-void playGame(list<Player> &registeredPlayers, string &ptrDataBase) {
+void playGame(list<Player> &registeredPlayers, string &ptrDataBase, Player *currentPlayer) {
     string guessString;
     bool roundIsRunning = true;
-    if (!isPlayerSelected) {
-        playerSelection(registeredPlayers, ptrDataBase);
-        isPlayerSelected = true;
+    while (currentPlayer == nullptr) {
+        playerSelection(registeredPlayers, ptrDataBase, currentPlayer);
     }
     do {
         vector<string> wordsForHangman;
@@ -99,7 +97,7 @@ void playGame(list<Player> &registeredPlayers, string &ptrDataBase) {
             case 5:
                 //The player can reselect their player
                 clearScreen();
-                playerSelection(registeredPlayers, ptrDataBase);
+                playerSelection(registeredPlayers, ptrDataBase, currentPlayer);
                 break;
             case 6:
                 //Return to main menu
@@ -137,8 +135,11 @@ void displayOptions() {
 }
 
 // Displays the main menu
-void mainMenu (list<Player> &registeredPlayers, string &ptrDataBase) {
-    
+void mainMenu (list<Player> &registeredPlayers, string &ptrDataBase, Player *currentPlayer) {
+    while (currentPlayer == nullptr) {
+        playerSelection(registeredPlayers, ptrDataBase, currentPlayer);
+    }
+
     do {
         clearScreen();
         printCentered("Main menu"); cout << endl;
@@ -161,7 +162,7 @@ void mainMenu (list<Player> &registeredPlayers, string &ptrDataBase) {
 
         switch (choice) {
             case 1:
-                playGame(registeredPlayers, ptrDataBase);
+                playGame(registeredPlayers, ptrDataBase, currentPlayer);
                 break;
             case 2:
                 //Display players and score
@@ -179,9 +180,7 @@ void mainMenu (list<Player> &registeredPlayers, string &ptrDataBase) {
                 break;
             case 5:
                 //Select player from list or add new player
-                isPlayerSelected = false;
-                playerSelection(registeredPlayers, ptrDataBase);
-                isPlayerSelected = true;
+                playerSelection(registeredPlayers, ptrDataBase, currentPlayer);
                 break;
             case 6:
                 //Quits the program
@@ -197,7 +196,6 @@ void mainMenu (list<Player> &registeredPlayers, string &ptrDataBase) {
     clearScreen();
     cout << "Thanks for playing!" << endl << endl;
     cout << "Press enter to exit..." << endl;
-    cin.ignore();
     cin.get();
 }
 
@@ -209,10 +207,10 @@ void mainMenu (list<Player> &registeredPlayers, string &ptrDataBase) {
  * @return int 
  */
 int main() {
-    isPlayerSelected = false;
     list<Player> registeredPlayers;
     string DataBase = "Players\\players.json";
     string *ptrDataBase = &DataBase;
+    Player *currentPlayer = nullptr;
     //loadPlayers(*ptrDataBase, registeredPlayers);
     printCentered("*****************************************");
     printCentered("*                                       *");
@@ -223,16 +221,15 @@ int main() {
 
     if (loadPlayers(*ptrDataBase, registeredPlayers).empty()) {
         cin.get();
-        playerSelection(registeredPlayers, *ptrDataBase);
+        playerSelection(registeredPlayers, *ptrDataBase, currentPlayer);
     }
     else {
         cout << "Players found." << endl;
         cin.get();
     }
     loadPlayers(*ptrDataBase, registeredPlayers);
-    cin.get();
     //sleepForSeconds(3);
-    mainMenu(registeredPlayers, *ptrDataBase);
+    mainMenu(registeredPlayers, *ptrDataBase, currentPlayer);
     savePlayers(*ptrDataBase, registeredPlayers);
     return 0;
 }

@@ -1,0 +1,18 @@
+[
+    {
+        "level": 0,
+        "name": "Eric",
+        "scoreInConnectFour": 0,
+        "scoreInHangman": 0,
+        "scoreInSnake": 0,
+        "scoreInTicTacToe": 0
+    },
+    {
+        "level": 0,
+        "name": "Elyn",
+        "scoreInConnectFour": 0,
+        "scoreInHangman": 0,
+        "scoreInSnake": 0,
+        "scoreInTicTacToe": 0
+    }
+]
