@@ -47,7 +47,7 @@ class Player {
     
     void displayPlayerInfo() ;
 
-    void displayScores() ;
+    void displayScores(string& playerName, list<Player> &registeredPlayers) ;
 
     string toString() ;
 
@@ -55,7 +55,7 @@ class Player {
 };
 
 void playerSelection(list<Player> &registeredPlayers, string &ptrDataBase, Player *&currentPlayer);
-void displayInfo(list<Player> &registeredPlayers);
+void displayInfo(list<Player> &registeredPlayers, Player *&currentPlayer);
 void displayScores();
 void displayPlayerScore(string &playerName, list<Player> &registeredPlayers);
 json loadPlayers(const string &ptrDataBase, list<Player> &registeredPlayers);

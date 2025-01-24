@@ -3,11 +3,6 @@
 #include "json.hpp"
 
 
-
-
-list<Player>::iterator it;
-
-
 void playerSelection (list<Player> &registeredPlayers, string &ptrDataBase, Player *&currentPlayer) {
     int choice;
     string choiceOfPlayer;
@@ -28,8 +23,10 @@ void playerSelection (list<Player> &registeredPlayers, string &ptrDataBase, Play
 /*         cout << "Currently selected player: " << endl
         << currentPlayer->getName() << endl; */
 
-        cout << endl << "Press 1 to select a player." << endl << "Press 2 to add a new player." 
-        << endl << "Press 3 to go back to the main menu." << endl
+        cout << endl << "Press 1 to select a player." 
+        << endl << "Press 2 to add a new player." 
+        << endl << "Press 3 to remove a player." << endl
+        << endl << "Press 4 to go back to the main menu." << endl
         << "Choice: ";
         cin >> choice;
 
@@ -83,6 +80,31 @@ void playerSelection (list<Player> &registeredPlayers, string &ptrDataBase, Play
                 sleepForSeconds(2);
                 break;
             case 3:
+                clearScreen();
+                cout << "Current registrered players: " << endl;
+                for (auto& player : registeredPlayers) {
+                    cout << player.getName() << endl;
+                }
+                cout << endl << "Enter the name of the player you want to remove: ";
+                cin >> choiceOfPlayer;
+                {
+                    auto it = registeredPlayers.begin();
+                    bool playerFound = false;
+                    while (it != registeredPlayers.end()) {
+                        if (it->getName() == choiceOfPlayer) {
+                            it = registeredPlayers.erase(it);
+                            savePlayers(ptrDataBase, registeredPlayers);
+                            cout << "Player has been removed." << endl;
+                            sleepForSeconds(2);
+                            playerFound = true;
+                            break;
+                        } else {
+                            ++it;
+                        }
+                    }
+                }
+                break;
+            case 4:
                 cout << "Returning to main menu..." << endl;
                 sleepForSeconds(2);
                 return;
@@ -95,7 +117,7 @@ void playerSelection (list<Player> &registeredPlayers, string &ptrDataBase, Play
 }
 
 
-void displayInfo(list<Player> &registeredPlayers) {
+void displayInfo(list<Player> &registeredPlayers, Player *&currentPlayer) {
     string playerName;
     do {
         clearScreen();
@@ -105,9 +127,12 @@ void displayInfo(list<Player> &registeredPlayers) {
         cout << "Or press enter to go back to the main menu " << endl;
         cout << "Enter a name: ";
         getline(cin, playerName);
-        if (!playerName.empty()) {
-            displayPlayerScore(playerName, registeredPlayers);
-            cin.get();
+        for (auto& player : registeredPlayers) {
+            if (player.getName() == playerName) {
+                displayPlayerScore(playerName, registeredPlayers);
+                cin.get();
+                break;
+            }
         }
     } while (!playerName.empty());
     printCentered("Returning to main menu...");
@@ -115,14 +140,14 @@ void displayInfo(list<Player> &registeredPlayers) {
 }
 
 
-void displayPlayerScore(string& playerName, list<Player> &registeredPlayers) {
+void displayPlayerScore(string &playerName, list<Player> &registeredPlayers) {
     bool playerFound = false;
     cout << endl << "Searching for player: " << playerName << endl;
     sleepForSeconds(2);
     for (auto& player : registeredPlayers) {
         if (player.getName() == playerName) {
             playerFound = true;
-            player.displayScores();
+            player.displayScores(playerName, registeredPlayers);
             break;
         }
     }
@@ -130,6 +155,7 @@ void displayPlayerScore(string& playerName, list<Player> &registeredPlayers) {
         cout << "Player not found." << endl;
     }
     cout << endl << "Press enter to continue..." << endl;
+    cin.get();
 }
 
 Player::Player(string& name) {
@@ -172,7 +198,8 @@ int Player::getLevel()  {
 }
 
 int Player::setLevel(int level) {
-    this->level = level;
+    int oldLevel = this->level;
+    this->level = level + oldLevel;
     cout << "Level has been set to: " << level << endl;
     return level;
 }
@@ -212,7 +239,7 @@ int Player::getScoreInHangman()  {
 }
 
 int Player::setScoreInHangman(int scoreInHangman) {
-    this->scoreInHangman = scoreInHangman;
+    this->scoreInHangman = scoreInHangman * 10;
     cout << "Score in Hangman has been set to: " << scoreInHangman << endl;
     return scoreInHangman;
 }
@@ -222,7 +249,7 @@ void Player::displayPlayerInfo()  {
     cout << "Level: " << this->level << endl;
 }
 
-void Player::displayScores()  {
+void Player::displayScores(string &playerName, list<Player> &registeredPlayers) {
     cout << "Scores:" << endl;
     cout << "Snake: " << this->scoreInSnake << endl;
     cout << "TicTacToe: " << this->scoreInTicTacToe << endl;

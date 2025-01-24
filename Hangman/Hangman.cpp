@@ -5,7 +5,7 @@ void endRunningRound(bool& roundIsRunning) {
     roundIsRunning = false;
 }
 
-void playHangman(vector<string>& wordsForHangman, string& guessString, bool& roundIsRunning){
+void playHangman(vector<string>& wordsForHangman, string& guessString, bool& roundIsRunning, Player *currentPlayer) {
 
     string randomWord = Randomizer(wordsForHangman);
     Game game(randomWord);
@@ -23,7 +23,7 @@ void playHangman(vector<string>& wordsForHangman, string& guessString, bool& rou
                 endRunningRound(roundIsRunning);
                 break;
         }
-        if(!game.guess(guessString[0], guessString) || game.hasGuessedString) { // Behövs guessString här egentligen? Det är ju bara en bokstav som ska gissas och om det är en string ska vi hoppa direkt till förkorat eller vunnit?
+        if(!game.guess(guessString[0], guessString, currentPlayer) || game.hasGuessedString) { // Behövs guessString här egentligen? Det är ju bara en bokstav som ska gissas och om det är en string ska vi hoppa direkt till förkorat eller vunnit?
             if (!game.hasGuessedString) {
                 cout << "Wrong guess!" << endl;
                 sleepForSeconds(2);
@@ -38,6 +38,8 @@ void playHangman(vector<string>& wordsForHangman, string& guessString, bool& rou
         if(game.win()) { // Den här körs när man har gissat rätt bokstäver.
             game.win();
             int attempts = game.incorrectGuesses.size();
+            currentPlayer->setScoreInHangman(attempts);
+            currentPlayer->setLevel(1);
             cout << "Congratulations! You won! " <<  "You guessed: " << randomWord << endl;
             cout << "The number of wrong guesses: " <<  attempts << endl;
             cout << endl;

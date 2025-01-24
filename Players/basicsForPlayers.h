@@ -16,12 +16,12 @@ void currentP(list<Player> &registeredPlayers) {
     }
 }
 
-void currentS(list<Player> &registeredPlayers) {
+/* void currentS(list<Player> &registeredPlayers) {
     cout << "Current registered players: " << endl;
     for (auto& Player : registeredPlayers) {
-        Player.displayScores();
+        Player.displayScores(playerName, registeredPlayers);
         cout << endl;
     }
-}
+} */
 
 #endif

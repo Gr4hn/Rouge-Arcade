@@ -49,16 +49,15 @@ void playGame(list<Player> &registeredPlayers, string &ptrDataBase, Player *curr
 
 
         clearScreen();
-        cout << "Select which game you would like to play: " << endl;
-
-        cout << "1. Snake" << endl;
-        cout << "2. Tic Tac Toe" << endl;
-        cout << "3. Connect Four" << endl;
-        cout << "4. Hangman" << endl;
-        cout << "5. Return to main menu" << endl << endl;
-        cout << "6. Select player" << endl;
-
-        cout << "Choice: ";
+        cout << "Select which game you would like to play: " 
+        << endl
+        << "1. Snake" << endl
+        << "2. Tic Tac Toe" << endl
+        << "3. Connect Four" << endl
+        << "4. Hangman" << endl
+        << "5. Select player" << endl << endl
+        << "6. Return to main menu" << endl << endl
+        << "Choice: ";
         int choiceOfGame;
         cin >> choiceOfGame;
         cout << endl;
@@ -92,7 +91,7 @@ void playGame(list<Player> &registeredPlayers, string &ptrDataBase, Player *curr
                 cout << "Playing game 4" << endl;
                 sleepForSeconds(2);
                 //Maybe add a function to display the rules of the game here?
-                playHangman(wordsForHangman, guessString, roundIsRunning);
+                playHangman(wordsForHangman, guessString, roundIsRunning, currentPlayer);
                 break;
             case 5:
                 //The player can reselect their player
@@ -144,15 +143,15 @@ void mainMenu (list<Player> &registeredPlayers, string &ptrDataBase, Player *cur
         clearScreen();
         printCentered("Main menu"); cout << endl;
         printCentered("--------------------------------"); cout << endl;
-        cout << endl;
-        cout << "Please select an option:" << endl;
-        cout << "1. Play" << endl;
-        cout << "2. Players and Score" << endl;
-        cout << "3. About the program" << endl;
-        cout << "4. Options" << endl;
-        cout << "5. Select player" << endl;
-        cout << "6. Quit" << endl;
-        cout << endl << endl;
+        cout << endl
+        << "Please select an option:" << endl
+        << "1. Play" << endl
+        << "2. Players and Score" << endl
+        << "3. About the program" << endl
+        << "4. Options" << endl
+        << "5. Select player" << endl << endl
+        << "6. Quit" << endl << endl;
+
         cout << "Choice: ";
         int choice;
         cin >> choice;
@@ -168,7 +167,7 @@ void mainMenu (list<Player> &registeredPlayers, string &ptrDataBase, Player *cur
                 //Display players and score
                 clearScreen();
                 cout << endl;
-                displayInfo(registeredPlayers);
+                displayInfo(registeredPlayers, currentPlayer);
                 break;
             case 3:
                 //Display about screen

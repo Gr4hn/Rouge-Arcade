@@ -2,6 +2,7 @@
 #define HANGMAN_H
 #include "clearScreen.h"
 #include "sleepForSeconds.h"
+#include "regPlayers.h"
 #include <iostream>
 #include <string>
 #include <vector>
@@ -16,7 +17,7 @@
 using namespace std;
 
 void endRunningRound(bool& roundIsRunning);
-void playHangman(vector<string>& wordsForHangman, string& guessString, bool& roundIsRunning);
+void playHangman(vector<string>& wordsForHangman, string& guessString, bool& roundIsRunning, Player *currentPlayer);
 string Randomizer(vector<string> list);
 
 
@@ -182,7 +183,7 @@ class Game
         return possibleLetters[dis(gen)];
     }
 
-    bool guess(char letter, string input) {
+    bool guess(char letter, string input, Player *currentPlayer) {
         string lowerInput = input;
         transform(lowerInput.begin(), lowerInput.end(), lowerInput.begin(), ::tolower);
         letter = tolower(letter);
@@ -220,8 +221,11 @@ class Game
             hasGuessedString = true;
             if (lowerInput == wordToGuess) {
                 //guessedLetters = wordToGuess;
-                cout << "Grattis! Du vann! " << "Du gissade r\u00E4tt ord: " << wordToGuess << endl
-                << "Tryck på valfri tangent för att fortsätta." << endl;
+                cout << "Grattis! Du vann! " << "Du gissade r\u00E4tt ord: " << wordToGuess << endl;
+                sleepForSeconds(1);
+                currentPlayer->setScoreInHangman(maxAttempts - incorrectGuesses.size());
+                currentPlayer->setLevel(1);
+                cout << "Tryck på valfri tangent för att fortsätta." << endl;
                 cin.ignore();
                 cin.get();
                 return true;
