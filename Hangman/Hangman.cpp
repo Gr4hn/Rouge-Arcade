@@ -40,10 +40,9 @@ void playHangman(vector<string>& wordsForHangman, string& guessString, bool& rou
             int attempts = game.incorrectGuesses.size();
             currentPlayer->setScoreInHangman(attempts);
             currentPlayer->setLevel(1);
-            cout << "Congratulations! You won! " <<  "You guessed: " << randomWord << endl;
-            cout << "The number of wrong guesses: " <<  attempts << endl;
-            cout << endl;
-            cout << "Enter a key of your choice to continue..." << endl;
+            cout << "Congratulations! You won! " <<  "You guessed: " << randomWord << endl
+            << "The number of wrong guesses: " <<  attempts << endl << endl
+            << "Enter a key of your choice to continue..." << endl;
             cin.ignore();
             cin.get();
             break;

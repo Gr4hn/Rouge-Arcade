@@ -1,0 +1,10 @@
+[
+    {
+        "level": 1,
+        "name": "Eric",
+        "scoreInConnectFour": 0,
+        "scoreInHangman": 60,
+        "scoreInSnake": 0,
+        "scoreInTicTacToe": 0
+    }
+]

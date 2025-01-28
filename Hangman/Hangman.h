@@ -44,13 +44,13 @@ class Game
         int error = incorrectGuesses.size();
 
         if (error == 0) {
-            cout << endl;
-            cout << endl;
-            cout << endl;
-            cout << endl;
-            cout << endl;
-            cout << "" << endl;
-            cout << endl;
+            cout << endl
+             << endl
+             << endl
+             << endl
+             << endl
+             << "" << endl
+             << endl;
         }
         if (error == 1) {
             cout << endl;
@@ -62,94 +62,94 @@ class Game
             cout << endl;
         }
         if (error == 2) {
-            cout << endl;
-            cout << "   |" << endl;
-            cout << "   |" << endl;
-            cout << "   |" << endl;
-            cout << "   |" << endl;
-            cout << "   |" << endl;
-            cout << "   |______" << endl;
-            cout << endl;
+            cout << endl
+             << "   |" << endl
+             << "   |" << endl
+             << "   |" << endl
+             << "   |" << endl
+             << "   |" << endl
+             << "   |______" << endl
+             << endl;
         }
         if (error == 3) {
-            cout << "   ______" << endl;
-            cout << "   |" << endl;
-            cout << "   |" << endl;
-            cout << "   |" << endl;
-            cout << "   |" << endl;
-            cout << "   |" << endl;
-            cout << "   |______" << endl;
-            cout << endl;
+            cout << "   ______" << endl
+             << "   |" << endl
+             << "   |" << endl
+             << "   |" << endl
+             << "   |" << endl
+             << "   |" << endl
+             << "   |______" << endl
+             << endl;
         }
         if (error == 4) {
-            cout << "   ______" << endl;
-            cout << "   |    |" << endl;
-            cout << "   |" << endl;
-            cout << "   |" << endl;
-            cout << "   |" << endl;
-            cout << "   |" << endl;
-            cout << "   |______" << endl;
-            cout << endl;
+            cout << "   ______" << endl
+             << "   |    |" << endl
+             << "   |" << endl
+             << "   |" << endl
+             << "   |" << endl
+             << "   |" << endl
+             << "   |______" << endl
+             << endl;
         }
         if (error == 5) {
-            cout << "   ______" << endl;
-            cout << "   |    |" << endl;
-            cout << "   |    O" << endl;
-            cout << "   |" << endl;
-            cout << "   |" << endl;
-            cout << "   |" << endl;
-            cout << "   |______" << endl;
-            cout << endl;
+            cout << "   ______" << endl
+             << "   |    |" << endl
+             << "   |    O" << endl
+             << "   |" << endl
+             << "   |" << endl
+             << "   |" << endl
+             << "   |______" << endl
+             << endl;
         }
         if (error == 6) {
-            cout << "   ______" << endl;
-            cout << "   |    |" << endl;
-            cout << "   |    O" << endl;
-            cout << "   |    |" << endl;
-            cout << "   |" << endl;
-            cout << "   |" << endl;
-            cout << "   |______" << endl;
-            cout << endl;
+            cout << "   ______" << endl
+             << "   |    |" << endl
+             << "   |    O" << endl
+             << "   |    |" << endl
+             << "   |" << endl
+             << "   |" << endl
+             << "   |______" << endl
+             << endl;
         }
         if (error == 7) {
-            cout << "   ______" << endl;
-            cout << "   |    |" << endl;
-            cout << "   |    O" << endl;
-            cout << "   |   /|" << endl;
-            cout << "   |" << endl;
-            cout << "   |" << endl;
-            cout << "   |______" << endl;
-            cout << endl;
+            cout << "   ______" << endl
+             << "   |    |" << endl
+             << "   |    O" << endl
+             << "   |   /|" << endl
+             << "   |" << endl
+             << "   |" << endl
+             << "   |______" << endl
+             << endl;
         }
         if (error == 8) {
-            cout << "   ______" << endl;
-            cout << "   |    |" << endl;
-            cout << "   |    O" << endl;
-            cout << "   |   /|\\" << endl;
-            cout << "   |" << endl;
-            cout << "   |" << endl;
-            cout << "   |______" << endl;
-            cout << endl;
+            cout << "   ______" << endl
+             << "   |    |" << endl
+             << "   |    O" << endl
+             << "   |   /|\\" << endl
+             << "   |" << endl
+             << "   |" << endl
+             << "   |______" << endl
+             << endl;
         }
         if (error == 9) {
-            cout << "   ______" << endl;
-            cout << "   |    |" << endl;
-            cout << "   |    O" << endl;
-            cout << "   |   /|\\" << endl;
-            cout << "   |   /" << endl;
-            cout << "   |" << endl;
-            cout << "   |______" << endl;
-            cout << endl;
+            cout << "   ______" << endl
+             << "   |    |" << endl
+             << "   |    O" << endl
+             << "   |   /|\\" << endl
+             << "   |   /" << endl
+             << "   |" << endl
+             << "   |______" << endl
+             << endl;
         }
         if (error == 10) {
-            cout << "   ______" << endl;
-            cout << "   |    |" << endl;
-            cout << "   |    O" << endl;
-            cout << "   |   /|\\" << endl;
-            cout << "   |   / \\" << endl;
-            cout << "   |" << endl;
-            cout << "   |______" << endl;
-            cout << endl;
+            cout << "   ______" << endl
+             << "   |    |" << endl
+             << "   |    O" << endl
+             << "   |   /|\\" << endl
+             << "   |   / \\" << endl
+             << "   |" << endl
+             << "   |______" << endl
+             << endl;
         }
     }
 
@@ -164,8 +164,8 @@ class Game
         for (char ch : incorrectGuesses) {
             cout << ch << " ";
         }
-        cout << endl << "Antal f\u00F6rs\u00F6k kvar: " << maxAttempts - incorrectGuesses.size() << endl;
-        cout <<endl <<"För att avsluta spelet, tryck in 0.\n";
+        cout << endl << "Antal f\u00F6rs\u00F6k kvar: " << maxAttempts - incorrectGuesses.size() 
+        << endl << endl << "För att avsluta spelet, tryck in 0.\n";
     }
 
     char selectMysteryLetter() {
@@ -192,7 +192,7 @@ class Game
             bool correct = false;
             if(isLetterGuessed(letter))
             {
-                cout <<"Du har redan gissat på bokstaven " << letter <<" försök igen!" << endl;
+                cout << "Du har redan gissat på bokstaven " << letter << " försök igen!" << endl;
                 sleepForSeconds(2);
                 return false;
             }

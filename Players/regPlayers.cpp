@@ -20,9 +20,6 @@ void playerSelection (list<Player> &registeredPlayers, string &ptrDataBase, Play
             cout << currentPlayer->getName() << endl;
         }
 
-/*         cout << "Currently selected player: " << endl
-        << currentPlayer->getName() << endl; */
-
         cout << endl << "Press 1 to select a player." 
         << endl << "Press 2 to add a new player." 
         << endl << "Press 3 to remove a player." << endl
@@ -51,10 +48,7 @@ void playerSelection (list<Player> &registeredPlayers, string &ptrDataBase, Play
                         sleepForSeconds(2);
                     }
                 }
-/*                 if (currentPlayer == nullptr) {
-                    cout << "Player not found." << endl;
-                    sleepForSeconds(2);
-                } */
+
                 break;
 
             case 2:
@@ -67,6 +61,7 @@ void playerSelection (list<Player> &registeredPlayers, string &ptrDataBase, Play
                         sleepForSeconds(2);
                         selectedPlayer = true;
                         currentPlayer = &player;
+
                         return;
                     }
                 }
@@ -78,7 +73,9 @@ void playerSelection (list<Player> &registeredPlayers, string &ptrDataBase, Play
                 selectedPlayer = true;
                 currentPlayer = &registeredPlayers.back();
                 sleepForSeconds(2);
+
                 break;
+
             case 3:
                 clearScreen();
                 cout << "Current registrered players: " << endl;
@@ -97,7 +94,9 @@ void playerSelection (list<Player> &registeredPlayers, string &ptrDataBase, Play
                             cout << "Player has been removed." << endl;
                             sleepForSeconds(2);
                             playerFound = true;
+
                             break;
+
                         } else {
                             ++it;
                         }
@@ -107,11 +106,15 @@ void playerSelection (list<Player> &registeredPlayers, string &ptrDataBase, Play
             case 4:
                 cout << "Returning to main menu..." << endl;
                 sleepForSeconds(2);
+
                 return;
+
             default:
                 cout << "Invalid choice. Please try again." << endl;
                 sleepForSeconds(2);
+
                 break;
+
         }
     } while (currentPlayer == nullptr || selectedPlayer == false);
 }
@@ -123,14 +126,15 @@ void displayInfo(list<Player> &registeredPlayers, Player *&currentPlayer) {
         clearScreen();
         cout << "Players and their levels: " << endl;
         currentP(registeredPlayers);
-        cout << "Enter a name in order to see the scores." << endl;
-        cout << "Or press enter to go back to the main menu " << endl;
-        cout << "Enter a name: ";
+        cout << "Enter a name in order to see the scores." << endl
+        << "Or press enter to go back to the main menu " << endl
+        << "Enter a name: ";
         getline(cin, playerName);
         for (auto& player : registeredPlayers) {
             if (player.getName() == playerName) {
                 displayPlayerScore(playerName, registeredPlayers);
                 cin.get();
+
                 break;
             }
         }

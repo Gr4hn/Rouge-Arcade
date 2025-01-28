@@ -117,9 +117,10 @@ void playGame(list<Player> &registeredPlayers, string &ptrDataBase, Player *curr
 void displayAbout() {
     clearScreen();
     printCentered("About the program"); cout << endl;
-    printCentered("--------------------------------"); cout << endl;
-    cout << endl;
-    cout << "About the program go here" << endl;
+    printCentered("--------------------------------"); 
+    cout << endl
+    << endl
+    << "About the program go here" << endl;
     cin.get();
 }
 
@@ -127,9 +128,10 @@ void displayAbout() {
 void displayOptions() {
     clearScreen();
     printCentered("Options"); cout << endl;
-    printCentered("--------------------------------"); cout << endl;
-    cout << endl;
-    cout << "Options go here" << endl;
+    printCentered("--------------------------------"); 
+    cout << endl
+    << endl
+    << "Options go here" << endl;
     cin.get();
 }
 
@@ -142,17 +144,17 @@ void mainMenu (list<Player> &registeredPlayers, string &ptrDataBase, Player *cur
     do {
         clearScreen();
         printCentered("Main menu"); cout << endl;
-        printCentered("--------------------------------"); cout << endl;
-        cout << endl
+        printCentered("--------------------------------"); 
+        cout << endl << endl
         << "Please select an option:" << endl
         << "1. Play" << endl
         << "2. Players and Score" << endl
         << "3. About the program" << endl
         << "4. Options" << endl
         << "5. Select player" << endl << endl
-        << "6. Quit" << endl << endl;
+        << "6. Quit" << endl << endl
 
-        cout << "Choice: ";
+        << "Choice: ";
         int choice;
         cin >> choice;
 
@@ -193,8 +195,8 @@ void mainMenu (list<Player> &registeredPlayers, string &ptrDataBase, Player *cur
     } while (gameIsRunning);
     
     clearScreen();
-    cout << "Thanks for playing!" << endl << endl;
-    cout << "Press enter to exit..." << endl;
+    cout << "Thanks for playing!" << endl << endl
+    << "Press enter to exit..." << endl;
     cin.get();
 }
 
