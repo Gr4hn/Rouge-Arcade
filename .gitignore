@@ -1,0 +1,6 @@
+# Ignore players.json for datasafty
+players/players.json
+
+# Ignore the ReadMe File
+README.md
+
